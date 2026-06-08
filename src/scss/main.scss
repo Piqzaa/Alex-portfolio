@@ -5,6 +5,7 @@
 @use "_components/nav" as *;
 @use "_components/btn" as *;
 @use "_components/card" as *;
-@use "_components/hero" as *;
 
 // --- Sections ---
+@use "_sections/hero" as *;
+@use "_sections/projects" as *;
