@@ -1,0 +1,184 @@
+@use "../variables" as *;
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: $z-particles;
+  pointer-events: none;
+}
+
+.hero__halo {
+  position: absolute;
+  inset: 0;
+  z-index: $z-halo;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero__halo-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba($color-primary, 0.15) 0%,
+    rgba($color-accent, 0.06) 40%,
+    transparent 70%
+  );
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition:
+    left 0.08s linear,
+    top 0.08s linear;
+  will-change: left, top;
+}
+
+.hero__bg-glow {
+  position: absolute;
+  inset: 0;
+  z-index: $z-particles;
+  background: $gradient-hero;
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: $z-content;
+  padding: $spacing-3xl 0 $spacing-2xl;
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-family: $font-mono;
+  font-size: $fs-sm;
+  color: $color-text-muted;
+  margin-bottom: $spacing-md;
+  animation: fadeInDown 0.8s $transition-slow both;
+}
+
+.hero__eyebrow span {
+  color: $color-primary;
+}
+
+.hero__name {
+  font-family: $font-display;
+  font-size: clamp($fs-5xl, 10vw, $fs-6xl);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: $gradient-text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: $spacing-sm;
+  animation: fadeInUp 0.9s $transition-slow 0.1s both;
+}
+
+.hero__title {
+  font-family: $font-display;
+  font-size: clamp($fs-2xl, 4vw, $fs-4xl);
+  font-weight: 600;
+  background: $gradient-accent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: $spacing-md;
+  animation: fadeInUp 0.9s $transition-slow 0.2s both;
+}
+
+.hero__desc {
+  font-size: $fs-lg;
+  color: $color-text-muted;
+  max-width: 520px;
+  margin: 0 auto $spacing-xl;
+  line-height: 1.7;
+  animation: fadeInUp 0.9s $transition-slow 0.3s both;
+}
+
+.hero__cta {
+  display: flex;
+  gap: $spacing-sm;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.9s $transition-slow 0.4s both;
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: $spacing-lg;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: $z-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xs;
+  color: $color-text-muted;
+  font-size: $fs-xs;
+  font-family: $font-mono;
+  letter-spacing: 0.1em;
+  animation: fadeIn 1s $transition-slow 1s both;
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, $color-primary, transparent);
+  animation: scrollLine 1.5s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scrollLine {
+  0%,
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleY(0.5);
+    opacity: 0.4;
+  }
+}
