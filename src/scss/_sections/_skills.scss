@@ -1,0 +1,72 @@
+@use "../variables" as *;
+
+.skills {
+  padding: $spacing-3xl 0;
+}
+
+.skills__header {
+  text-align: center;
+  margin-bottom: $spacing-2xl;
+}
+
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: $spacing-sm;
+}
+
+.skill-group {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+}
+
+.skill-group__title {
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  color: $color-primary;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: $spacing-sm;
+  padding-bottom: $spacing-xs;
+  border-bottom: 1px solid $color-border;
+}
+
+.skill-group__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: $radius-sm;
+  font-size: $fs-xs;
+  font-family: $font-mono;
+  font-weight: 500;
+  color: $color-text-muted;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $color-border;
+  transition:
+    color $transition-fast,
+    border-color $transition-fast,
+    background $transition-fast;
+
+  &:hover {
+    color: $color-text;
+    border-color: rgba($color-primary, 0.3);
+    background: rgba($color-primary, 0.06);
+  }
+}
+
+.skill-tag__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.5;
+}
