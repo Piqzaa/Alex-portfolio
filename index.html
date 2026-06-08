@@ -1,13 +1,495 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>alex-portfolio</title>
+    <meta
+      name="description"
+      content="Alex Berrel — Développeur Web & E-commerce. Sites modernes, WooCommerce, PHP."
+    />
+    <title>Alex Berrel — Développeur Web</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="module" src="/src/js/main.js"></script>
+    <link rel="stylesheet" href="/css/main.css" />
   </head>
+
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <header>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="#hero" class="nav__logo" aria-label="Alex Berrel - Accueil"
+          >AB</a
+        >
+        <ul class="nav__links" role="list">
+          <li><a href="#hero" class="nav__link active">Accueil</a></li>
+          <li><a href="#projects" class="nav__link">Projets</a></li>
+          <li><a href="#about" class="nav__link">À propos</a></li>
+          <li><a href="#skills" class="nav__link">Stack</a></li>
+          <li><a href="#contact" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="hero" class="hero" aria-label="Introduction">
+        <canvas
+          id="hero-canvas"
+          class="hero__canvas"
+          aria-hidden="true"
+        ></canvas>
+
+        <div class="hero__halo" aria-hidden="true">
+          <div id="hero-halo-glow" class="hero__halo-glow"></div>
+        </div>
+
+        <div class="hero__bg-glow" aria-hidden="true"></div>
+
+        <!-- Contenu -->
+        <div class="hero__content container">
+          <p class="hero__eyebrow" aria-label="Bienvenue sur mon portfolio">
+            <span>✦</span> Bienvenue sur mon portfolio
+          </p>
+          <h1 class="hero__name">Alex Berrel</h1>
+          <p class="hero__title" role="doc-subtitle">Développeur Web</p>
+          <p class="hero__desc">
+            Je crée des sites modernes et des e-commerce performants.<br />
+            PHP · WordPress · WooCommerce · Strasbourg.
+          </p>
+          <div class="hero__cta">
+            <a href="#projects" class="btn btn--primary">
+              Voir mes projets ↓
+            </a>
+            <a href="#contact" class="btn btn--outline"> Me contacter ✉ </a>
+          </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="hero__scroll" aria-hidden="true">
+          <div class="hero__scroll-line"></div>
+          <span>scroll</span>
+        </div>
+      </section>
+
+      <section id="projects" class="projects" aria-label="Mes projets">
+        <div class="container">
+          <div class="projects__header reveal">
+            <p class="section-label">Projets</p>
+            <h2 class="section-title">Ce que j'ai construit</h2>
+            <p class="section-subtitle">
+              Des applications full-stack développées en autonomie, de la
+              conception à la mise en production.
+            </p>
+          </div>
+
+          <div class="projects__grid">
+            <!-- Projet 1 — Jobflow -->
+            <article class="card reveal" aria-label="Projet Jobflow">
+              <div class="card__header">
+                <div class="card__icon" aria-hidden="true">💼</div>
+                <div class="card__links">
+                  <a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener"
+                    class="card__link"
+                    aria-label="Code source Jobflow sur GitHub"
+                  >
+                    <!-- GitHub icon -->
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.745 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                      />
+                    </svg>
+                  </a>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                    class="card__link"
+                    aria-label="Démo live Jobflow"
+                  >
+                    <!-- External link icon -->
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
+                      />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <h3 class="card__title">Jobflow</h3>
+              <p class="card__desc">
+                Application SaaS de gestion de devis & facturation avec
+                dashboard analytics, authentification multi-rôles, export PDF et
+                envoi d'emails transactionnels.
+              </p>
+              <div class="card__stack">
+                <span class="badge">PHP 8.2</span>
+                <span class="badge">MVC PSR-4</span>
+                <span class="badge">MySQL</span>
+                <span class="badge badge--accent">MongoDB</span>
+                <span class="badge">SCSS BEM</span>
+                <span class="badge badge--muted">Docker</span>
+                <span class="badge badge--muted">Brevo SMTP</span>
+                <span class="badge badge--muted">Chart.js</span>
+              </div>
+            </article>
+
+            <!-- Projet 2 — Vite & Gourmand -->
+            <article class="card reveal" aria-label="Projet Vite et Gourmand">
+              <div class="card__header">
+                <div class="card__icon" aria-hidden="true">🍽️</div>
+                <div class="card__links">
+                  <a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener"
+                    class="card__link"
+                    aria-label="Code source Vite et Gourmand"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.745 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                      />
+                    </svg>
+                  </a>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                    class="card__link"
+                    aria-label="Démo live Vite et Gourmand"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
+                      />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <h3 class="card__title">Vite & Gourmand</h3>
+              <p class="card__desc">
+                Plateforme de restauration en ligne : commandes avec validation
+                72h, espace client/employé/admin, logging MongoDB, menu
+                dynamique et formulaire de contact.
+              </p>
+              <div class="card__stack">
+                <span class="badge">PHP 8.2</span>
+                <span class="badge">MVC</span>
+                <span class="badge">MySQL</span>
+                <span class="badge badge--accent">MongoDB</span>
+                <span class="badge">SCSS BEM</span>
+                <span class="badge badge--muted">Docker</span>
+                <span class="badge badge--muted">Mailpit</span>
+                <span class="badge badge--muted">Chart.js</span>
+              </div>
+            </article>
+
+            <!-- Projet 3 — Coming soon -->
+            <article
+              class="card projects__soon reveal"
+              aria-label="Prochain projet en cours"
+            >
+              <div style="font-size: 2rem; opacity: 0.4" aria-hidden="true">
+                🚀
+              </div>
+              <p class="section-label">Projet #3</p>
+              <p>En cours de développement…</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="about" aria-label="À propos de moi">
+        <div class="container">
+          <div class="about__inner">
+            <div class="about__text reveal">
+              <p class="section-label">À propos</p>
+              <h2 class="section-title">
+                Reconversion &amp;<br />passion du code
+              </h2>
+              <p>
+                Opérateur en pétrochimie le jour, développeur web la nuit — En
+                cours de certification
+                <strong>TP Développeur Web et Web Mobile (RNCP)</strong>, je
+                construis des applications full-stack en PHP vanilla MVC et
+                e-commerce WordPress.
+              </p>
+              <p>
+                Mon approche : du code
+                <strong>propre, structuré et défendable</strong>. Architecture
+                MVC, BEM/SCSS, Docker, APIs tierces.
+              </p>
+              <p>
+                Basé à <strong>Strasbourg</strong>. Disponible pour des missions
+                freelance WordPress/WooCommerce et projets sur mesure.
+              </p>
+            </div>
+
+            <div class="about__visual reveal">
+              <div class="stat-card">
+                <div class="stat-card__icon">🎓</div>
+                <div>
+                  <div class="stat-card__label">Formation</div>
+                  <div class="stat-card__value">
+                    TP Dev Web &amp; Web Mobile — RNCP
+                  </div>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card__icon">📍</div>
+                <div>
+                  <div class="stat-card__label">Localisation</div>
+                  <div class="stat-card__value">Strasbourg, France</div>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card__icon">💼</div>
+                <div>
+                  <div class="stat-card__label">Disponibilité</div>
+                  <div class="stat-card__value">
+                    Missions freelance · Fin 2025
+                  </div>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card__icon">🚀</div>
+                <div>
+                  <div class="stat-card__label">Objectif</div>
+                  <div class="stat-card__value">
+                    Full-stack freelance · WP · PHP
+                  </div>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card__icon">🎮</div>
+                <div>
+                  <div class="stat-card__label">Hors clavier</div>
+                  <div class="stat-card__value">
+                    Subnautica · Road trips · Chat
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="skills" aria-label="Ma stack technique">
+        <div class="container">
+          <div class="skills__header reveal">
+            <p class="section-label">Stack</p>
+            <h2 class="section-title">Outils &amp; techno</h2>
+          </div>
+
+          <div class="skills__grid">
+            <div class="skill-group reveal">
+              <div class="skill-group__title">Backend</div>
+              <div class="skill-group__items">
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>PHP 8.2</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>MVC PSR-4</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>MySQL</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>MongoDB</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>PHPMailer</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>Dompdf</span
+                >
+              </div>
+            </div>
+
+            <div class="skill-group reveal">
+              <div class="skill-group__title">Frontend</div>
+              <div class="skill-group__items">
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>HTML5</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>SCSS / BEM</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>JS ES6+</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>Canvas API</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>Chart.js</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>Vite</span
+                >
+              </div>
+            </div>
+
+            <div class="skill-group reveal">
+              <div class="skill-group__title">WordPress / E-commerce</div>
+              <div class="skill-group__items">
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>WordPress</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>WooCommerce</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>Bedrock</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>ACF</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>Child theme</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>Printify API</span
+                >
+              </div>
+            </div>
+
+            <div class="skill-group reveal">
+              <div class="skill-group__title">DevOps / Outils</div>
+              <div class="skill-group__items">
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>Docker</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>Git / GitHub</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>VS Code</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>Gemini CLI</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>Local WP</span
+                >
+                <span class="skill-tag"
+                  ><span class="skill-tag__dot"></span>Mailpit</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact" aria-label="Contact">
+        <div class="container">
+          <div class="contact__inner">
+            <div class="reveal">
+              <p class="section-label">Contact</p>
+              <h2 class="section-title">Travaillons ensemble</h2>
+              <p class="section-subtitle">
+                Besoin d'un site WordPress, d'une boutique WooCommerce ou d'un
+                projet sur mesure ?
+              </p>
+            </div>
+
+            <div class="contact__card reveal">
+              <div class="contact__links">
+                <a href="mailto:alex@exemple.fr" class="contact__link">
+                  <span class="contact__link-icon" aria-hidden="true">✉</span>
+                  <div>
+                    <div class="contact__link-label">Email</div>
+                    <div class="contact__link-value">alex@exemple.fr</div>
+                  </div>
+                  <span class="contact__link-arrow" aria-hidden="true">→</span>
+                </a>
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener"
+                  class="contact__link"
+                >
+                  <span class="contact__link-icon" aria-hidden="true">💼</span>
+                  <div>
+                    <div class="contact__link-label">LinkedIn</div>
+                    <div class="contact__link-value">
+                      linkedin.com/in/alexberrel
+                    </div>
+                  </div>
+                  <span class="contact__link-arrow" aria-hidden="true">→</span>
+                </a>
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noopener"
+                  class="contact__link"
+                >
+                  <span class="contact__link-icon" aria-hidden="true">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.745 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                      />
+                    </svg>
+                  </span>
+                  <div>
+                    <div class="contact__link-label">GitHub</div>
+                    <div class="contact__link-value">github.com/alexberrel</div>
+                  </div>
+                  <span class="contact__link-arrow" aria-hidden="true">→</span>
+                </a>
+              </div>
+
+              <div class="contact__divider">ou directement par email</div>
+
+              <div class="contact__cta">
+                <a href="mailto:alex@exemple.fr" class="btn btn--primary">
+                  M'envoyer un message ✉
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer">
+          <span class="footer__logo">AB</span>
+          <p>© 2025 Alex Berrel · Fait avec Vite + SCSS vanille ✦</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
