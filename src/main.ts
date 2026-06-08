@@ -1,10 +1,13 @@
 import './scss/main.scss'
 import { initHalo } from './js/halo.js';
 import { initParticles } from './js/particles.js';
-import { initAnimations } from './js/animations.js';
+import { initScrollReveal, initNavScroll, initActiveLinks, initSmoothScroll } from './js/animations.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   initHalo("hero-halo-glow");
   initParticles("hero-canvas");
-  initAnimations();
+  initScrollReveal();
+  initNavScroll();
+  initActiveLinks();
+  initSmoothScroll();
 });
