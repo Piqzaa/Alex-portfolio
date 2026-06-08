@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: $font-body;
+  background-color: $color-bg;
+  color: $color-text;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: $color-bg;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba($color-primary, 0.4);
+  border-radius: $radius-full;
+  &:hover {
+    background: rgba($color-primary, 0.7);
+  }
+}
+
+::selection {
+  background: rgba($color-primary, 0.3);
+  color: $color-text;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color $transition-fast;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid rgba($color-primary, 0.6);
+  outline-offset: 3px;
+  border-radius: $radius-sm;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+
+  @media (max-width: $bp-md) {
+    padding: 0 $spacing-sm;
+  }
+}
+
+section {
+  position: relative;
+  z-index: $z-content;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: $font-display;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-family: $font-mono;
+  font-size: $fs-sm;
+  color: $color-primary;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: $spacing-sm;
+
+  &::before {
+    content: "//";
+    opacity: 0.5;
+  }
+}
+
+.section-title {
+  font-size: clamp($fs-3xl, 4vw, $fs-5xl);
+  background: $gradient-text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: $spacing-sm;
+}
+
+.section-subtitle {
+  font-size: $fs-lg;
+  color: $color-text-muted;
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.7s $transition-slow,
+    transform 0.7s $transition-slow;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @for $i from 1 through 8 {
+    &:nth-child(#{$i}) {
+      transition-delay: #{($i - 1) * 0.1}s;
+    }
+  }
+}

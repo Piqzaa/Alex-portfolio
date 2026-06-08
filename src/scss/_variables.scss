@@ -1,0 +1,73 @@
+$color-bg: #07080f; // fond quasi-noir bleuté
+$color-surface: #0e1020; // cartes / nav
+$color-surface-alt: #131629; // hover states
+
+$color-primary: #7c6ef5; // violet clair (hero title)
+$color-accent: #e050a0; // rose/magenta (Développeur Web)
+$color-star: #ffffff; // particules
+
+$color-text: #e8e8f0; // texte principal
+$color-text-muted: #8888aa; // texte secondaire
+$color-border: rgba(255, 255, 255, 0.08);
+
+$gradient-hero: radial-gradient(
+  ellipse 70% 60% at 60% 50%,
+  rgba(100, 60, 180, 0.35) 0%,
+  rgba(180, 40, 120, 0.15) 50%,
+  transparent 100%
+);
+
+$gradient-text: linear-gradient(135deg, #a78bfa 0%, #7c6ef5 50%, #c084fc 100%);
+$gradient-accent: linear-gradient(135deg, #e050a0 0%, #f472b6 100%);
+$gradient-card: linear-gradient(
+  135deg,
+  rgba(124, 110, 245, 0.08) 0%,
+  rgba(224, 80, 160, 0.04) 100%
+);
+
+$font-display: "Space Grotesk", sans-serif;
+$font-body: "Inter", sans-serif;
+$font-mono: "JetBrains Mono", monospace;
+$fs-xs: 0.75rem;
+$fs-sm: 0.875rem;
+$fs-base: 1rem;
+$fs-lg: 1.125rem;
+$fs-xl: 1.25rem;
+$fs-2xl: 1.5rem;
+$fs-3xl: 2rem;
+$fs-4xl: 2.75rem;
+$fs-5xl: 3.75rem;
+$fs-6xl: 5rem;
+
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+$spacing-2xl: 5rem;
+$spacing-3xl: 8rem;
+
+$bp-sm: 640px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+
+$radius-sm: 6px;
+$radius-md: 12px;
+$radius-lg: 20px;
+$radius-full: 9999px;
+
+$z-particles: 0;
+$z-halo: 1;
+$z-content: 2;
+$z-nav: 100;
+
+$transition-fast: 0.15s ease;
+$transition-base: 0.3s ease;
+$transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+$shadow-card:
+  0 4px 32px rgba(0, 0, 0, 0.4),
+  0 1px 0 rgba(255, 255, 255, 0.04) inset;
+$shadow-glow: 0 0 60px rgba(124, 110, 245, 0.25);
+$shadow-accent: 0 0 40px rgba(224, 80, 160, 0.2);
