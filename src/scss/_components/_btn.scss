@@ -1,0 +1,33 @@
+@use "../variables" as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  font-weight: 500;
+  font-size: $fs-sm;
+  border-radius: $radius-sm;
+  transition: all $transition-base;
+  cursor: pointer;
+}
+
+.btn--primary {
+  background: $gradient-text;
+  color: #fff;
+  border: 1px solid transparent;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
+
+.btn--outline {
+  background: transparent;
+  color: $color-text;
+  border: 1px solid $color-border;
+
+  &:hover {
+    border-color: $color-primary;
+  }
+}
