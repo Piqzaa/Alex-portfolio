@@ -5,7 +5,13 @@
   border: 1px solid $color-border;
   border-radius: $radius-md;
   padding: $spacing-md;
-  transition: transform $transition-base, border-color $transition-base;
+  transition:
+    transform $transition-base,
+    border-color $transition-base;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: $spacing-md;
 
   &:hover {
     border-color: rgba($color-primary, 0.5);
@@ -24,20 +30,6 @@
   font-size: $fs-2xl;
 }
 
-.card__links {
-  display: flex;
-  gap: $spacing-sm;
-}
-
-.card__link {
-  color: $color-text-muted;
-  transition: color $transition-fast;
-
-  &:hover {
-    color: $color-primary;
-  }
-}
-
 .card__title {
   font-size: $fs-lg;
   margin-bottom: $spacing-xs;
@@ -48,10 +40,18 @@
   color: $color-text-muted;
   line-height: 1.5;
   margin-bottom: $spacing-md;
+  flex-grow: 1;
 }
 
 .card__stack {
   display: flex;
   flex-wrap: wrap;
   gap: $spacing-xs;
+  margin-bottom: $spacing-md;
+}
+
+.card__actions {
+  display: flex;
+  gap: $spacing-sm;
+  margin-top: auto;
 }
