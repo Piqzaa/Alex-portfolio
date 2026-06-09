@@ -50,8 +50,9 @@
   margin-bottom: $spacing-md;
 }
 
-.card__actions {
+.card__links {
   display: flex;
   gap: $spacing-sm;
-  margin-top: auto;
+  flex-wrap: wrap;
 }
+

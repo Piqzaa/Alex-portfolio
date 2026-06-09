@@ -3,52 +3,59 @@
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: $spacing-xs;
-  padding: $spacing-sm $spacing-md;
-  font-weight: 500;
+  padding: 10px 20px;
+  font-family: $font-mono;
+  text-transform: uppercase;
+  font-weight: bold;
   font-size: $fs-sm;
-  border-radius: $radius-sm;
-  transition: all $transition-base;
   cursor: pointer;
   position: relative;
-  overflow: hidden;
+  transition: all 0.2s;
+  border: 2px solid $color-text;
+  box-shadow: 4px 4px 0px $color-text;
 }
 
-.btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left $transition-base;
-}
-
-.btn:hover::before {
-  left: 100%;
+.btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px $color-primary;
 }
 
 .btn--primary {
-  background: $gradient-text;
+  background: $color-primary;
   color: #fff;
-  border: 1px solid transparent;
+  border-color: $color-primary;
+  box-shadow: 4px 4px 0px rgba($color-primary, 0.5);
 
   &:hover {
-    filter: brightness(1.1);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba($color-primary, 0.3);
+    background: lighten($color-primary, 10%);
+    border-color: #fff;
   }
 }
 
 .btn--outline {
   background: transparent;
   color: $color-text;
-  border: 1px solid $color-border;
+  border-color: $color-text;
+  
+  &:hover {
+    background: rgba($color-primary, 0.2);
+    border-color: $color-primary;
+    color: #fff;
+  }
+}
+
+.btn--game {
+  background: transparent;
+  color: #fff;
+  border: 2px solid $color-primary;
+  box-shadow: 4px 4px 0px $color-primary;
 
   &:hover {
-    border-color: $color-primary;
-    background: rgba($color-primary, 0.05);
-    transform: translateY(-2px);
+    background: $color-primary;
+    color: #fff;
+    box-shadow: 6px 6px 0px $color-accent;
+    border-color: $color-accent;
   }
 }
