@@ -125,3 +125,8 @@ h4 {
   margin: 0 auto;
 }
 
+@media (min-width: $bp-xl) {
+  body {
+    zoom: 1.15;
+  }
+}
