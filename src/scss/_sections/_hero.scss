@@ -27,13 +27,13 @@
 
 .hero__halo-glow {
   position: absolute;
-  width: 600px;
-  height: 600px;
+  width: 400px;
+  height: 400px;
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba($color-primary, 0.15) 0%,
-    rgba($color-accent, 0.06) 40%,
+    rgba($color-primary, 0.3) 0%,
+    rgba($color-accent, 0.12) 40%,
     transparent 70%
   );
   transform: translate(-50%, -50%);
@@ -41,7 +41,20 @@
   transition:
     left 0.08s linear,
     top 0.08s linear;
-  will-change: left, top;
+  will-change: left, top, width, height;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    width: 400px;
+    height: 400px;
+  }
+  50% {
+    width: 550px;
+    height: 550px;
+  }
 }
 
 .hero__bg-glow {
