@@ -25,8 +25,8 @@ $gradient-card: linear-gradient(
   rgba(224, 80, 160, 0.04) 100%
 );
 
-$font-display: "Space Grotesk", sans-serif;
-$font-body: "Inter", sans-serif;
+$font-display: "Press Start 2P", cursive;
+$font-body: "JetBrains Mono", monospace;
 $font-mono: "JetBrains Mono", monospace;
 $fs-xs: 0.75rem;
 $fs-sm: 0.875rem;
@@ -52,10 +52,10 @@ $bp-md: 768px;
 $bp-lg: 1024px;
 $bp-xl: 1280px;
 
-$radius-sm: 6px;
-$radius-md: 12px;
-$radius-lg: 20px;
-$radius-full: 9999px;
+$radius-sm: 2px;
+$radius-md: 2px;
+$radius-lg: 4px;
+$radius-full: 2px;
 
 $z-particles: 0;
 $z-halo: 1;
@@ -71,3 +71,9 @@ $shadow-card:
   0 1px 0 rgba(255, 255, 255, 0.04) inset;
 $shadow-glow: 0 0 60px rgba(124, 110, 245, 0.25);
 $shadow-accent: 0 0 40px rgba(224, 80, 160, 0.2);
+
+$color-grid: rgba(124, 110, 245, 0.04);
+$color-scanline: rgba(0, 0, 0, 0.15);
+$pixel-border: 2px solid $color-primary;
+$pixel-shadow: 4px 4px 0px $color-primary;
+$pixel-shadow-accent: 4px 4px 0px $color-accent;

@@ -1,5 +1,5 @@
 @use "variables" as *;
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500&display=swap");
 
 *,
 *::before,
@@ -22,6 +22,10 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image:
+    linear-gradient($color-grid 1px, transparent 1px),
+    linear-gradient(90deg, $color-grid 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 ::-webkit-scrollbar {
@@ -82,9 +86,9 @@ h2,
 h3,
 h4 {
   font-family: $font-display;
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0;
 }
 
 .section-label {
@@ -105,7 +109,7 @@ h4 {
 }
 
 .section-title {
-  font-size: clamp($fs-3xl, 4vw, $fs-5xl);
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
   background: $gradient-text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -123,14 +127,14 @@ h4 {
 
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
+  clip-path: inset(0 100% 0 0);
   transition:
-    opacity 0.7s $transition-slow,
-    transform 0.7s $transition-slow;
+    opacity 0.4s steps(4, end),
+    clip-path 0.5s steps(6, end);
 
   &.visible {
     opacity: 1;
-    transform: translateY(0);
+    clip-path: inset(0 0% 0 0);
   }
 
   @for $i from 1 through 8 {
