@@ -12,63 +12,68 @@
   justify-content: space-between;
   transition:
     background $transition-base,
-    backdrop-filter $transition-base,
     border-color $transition-base;
-  border-bottom: 1px solid transparent;
+  border-bottom: 2px solid transparent;
+}
 
-  &.scrolled {
-    background: rgba($color-surface, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom-color: $color-border;
-  }
+.nav.scrolled {
+  background: $color-surface;
+  border-bottom: 2px solid $color-primary;
 }
 
 .nav__logo {
   font-family: $font-display;
-  font-size: $fs-xl;
-  font-weight: 700;
-  background: $gradient-text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.03em;
+  font-size: $fs-base;
+  color: $color-primary;
+  image-rendering: pixelated;
+}
+
+.nav__logo:hover {
+  color: $color-accent;
 }
 
 .nav__links {
   display: flex;
   align-items: center;
-  gap: $spacing-lg;
+  gap: $spacing-xl;
   list-style: none;
+}
 
-  @media (max-width: $bp-md) {
+@media (max-width: $bp-md) {
+  .nav__links {
     display: none;
   }
 }
 
 .nav__link {
-  font-size: $fs-sm;
-  font-weight: 500;
+  font-family: $font-display;
+  font-size: $fs-xs;
   color: $color-text-muted;
   transition: color $transition-fast;
   position: relative;
+}
 
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: $gradient-text;
-    transition: width $transition-base;
-  }
+.nav__link::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: $color-primary;
+  transition: width 0.2s steps(4, end);
+}
 
-  &:hover,
-  &.active {
-    color: $color-text;
-    &::after {
-      width: 100%;
-    }
-  }
+.nav__link:hover,
+.nav__link.active {
+  color: $color-text;
+}
+
+.nav__link:hover::after,
+.nav__link.active::after {
+  width: 100%;
+}
+
+.nav__link.active {
+  color: $color-primary;
 }
