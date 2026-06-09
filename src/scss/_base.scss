@@ -125,21 +125,3 @@ h4 {
   margin: 0 auto;
 }
 
-.reveal {
-  opacity: 0;
-  clip-path: inset(0 100% 0 0);
-  transition:
-    opacity 0.4s steps(4, end),
-    clip-path 0.5s steps(6, end);
-
-  &.visible {
-    opacity: 1;
-    clip-path: inset(0 0% 0 0);
-  }
-
-  @for $i from 1 through 8 {
-    &:nth-child(#{$i}) {
-      transition-delay: #{($i - 1) * 0.1}s;
-    }
-  }
-}
