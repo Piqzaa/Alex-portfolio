@@ -5,8 +5,6 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
   overflow: hidden;
 }
 
@@ -27,13 +25,12 @@
 
 .hero__halo-glow {
   position: absolute;
-  width: 400px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba($color-primary, 0.3) 0%,
-    rgba($color-accent, 0.12) 40%,
+    rgba($color-primary, 0.12) 0%,
     transparent 70%
   );
   transform: translate(-50%, -50%);
@@ -41,20 +38,7 @@
   transition:
     left 0.08s linear,
     top 0.08s linear;
-  will-change: left, top, width, height;
-  animation: pulse 4s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    width: 400px;
-    height: 400px;
-  }
-  50% {
-    width: 550px;
-    height: 550px;
-  }
+  will-change: left, top;
 }
 
 .hero__bg-glow {
@@ -68,18 +52,38 @@
 .hero__content {
   position: relative;
   z-index: $z-content;
-  padding: $spacing-3xl 0 $spacing-2xl;
+  padding: 120px 0 $spacing-2xl;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: $spacing-2xl;
+  align-items: center;
+}
+
+@media (max-width: $bp-lg) {
+  .hero__content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+.hero__left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@media (max-width: $bp-lg) {
+  .hero__left {
+    align-items: center;
+  }
 }
 
 .hero__eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: $spacing-xs;
   font-family: $font-mono;
   font-size: $fs-sm;
   color: $color-text-muted;
   margin-bottom: $spacing-md;
-  animation: fadeInDown 0.8s $transition-slow both;
+  animation: pixelFadeIn 0.6s steps(6, end) both;
 }
 
 .hero__eyebrow span {
@@ -88,45 +92,38 @@
 
 .hero__name {
   font-family: $font-display;
-  font-size: clamp($fs-5xl, 10vw, $fs-6xl);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1;
-  background: $gradient-text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 400;
+  color: $color-primary;
+  line-height: 1.3;
   margin-bottom: $spacing-sm;
-  animation: fadeInUp 0.9s $transition-slow 0.1s both;
+  animation: pixelFadeIn 0.6s steps(6, end) 0.1s both;
 }
 
 .hero__title {
   font-family: $font-display;
-  font-size: clamp($fs-2xl, 4vw, $fs-4xl);
-  font-weight: 600;
-  background: $gradient-accent;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: clamp(1rem, 2.5vw, 1.6rem);
+  font-weight: 400;
+  color: $color-accent;
   margin-bottom: $spacing-md;
-  animation: fadeInUp 0.9s $transition-slow 0.2s both;
+  animation: pixelFadeIn 0.6s steps(6, end) 0.2s both;
 }
 
 .hero__desc {
-  font-size: $fs-lg;
+  font-family: $font-body;
+  font-size: $fs-base;
   color: $color-text-muted;
-  max-width: 520px;
-  margin: 0 auto $spacing-xl;
-  line-height: 1.7;
-  animation: fadeInUp 0.9s $transition-slow 0.3s both;
+  max-width: 480px;
+  line-height: 1.8;
+  margin-bottom: $spacing-xl;
+  animation: pixelFadeIn 0.6s steps(6, end) 0.3s both;
 }
 
 .hero__cta {
   display: flex;
   gap: $spacing-sm;
-  justify-content: center;
   flex-wrap: wrap;
-  animation: fadeInUp 0.9s $transition-slow 0.4s both;
+  animation: pixelFadeIn 0.6s steps(6, end) 0.4s both;
 }
 
 .hero__scroll {
@@ -143,20 +140,170 @@
   font-size: $fs-xs;
   font-family: $font-mono;
   letter-spacing: 0.1em;
-  animation: fadeIn 1s $transition-slow 1s both;
+  animation: pixelFadeIn 0.6s steps(6, end) 1s both;
 }
 
 .hero__scroll-line {
   width: 1px;
   height: 40px;
   background: linear-gradient(to bottom, $color-primary, transparent);
-  animation: scrollLine 1.5s ease-in-out infinite;
+  animation: scrollBlink 1.2s steps(2, end) infinite;
 }
 
-@keyframes fadeInUp {
+.player-card {
+  width: 280px;
+  border: 2px solid $color-primary;
+  box-shadow: $pixel-shadow;
+  background: $color-surface;
+  animation: pixelFadeIn 0.8s steps(8, end) 0.5s both;
+  flex-shrink: 0;
+}
+
+@media (max-width: $bp-lg) {
+  .player-card {
+    width: 240px;
+    margin: 0 auto;
+  }
+}
+
+.player-card__header {
+  background: $color-primary;
+  padding: 6px $spacing-sm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.player-card__class,
+.player-card__level {
+  font-family: $font-display;
+  font-size: 0.45rem;
+  color: $color-bg;
+}
+
+.player-card__portrait {
+  position: relative;
+  background: $color-bg;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  height: 260px;
+  border-bottom: 2px solid $color-primary;
+}
+
+.player-card__portrait img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  object-position: bottom;
+  image-rendering: pixelated;
+}
+
+.player-card__portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    $color-scanline 2px,
+    $color-scanline 4px
+  );
+  pointer-events: none;
+}
+
+.player-card__name {
+  padding: $spacing-xs $spacing-sm;
+  border-bottom: 1px solid $color-border;
+  font-family: $font-display;
+  font-size: 0.5rem;
+  color: $color-text;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.player-card__stats {
+  padding: $spacing-xs $spacing-sm;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.player-card__stat {
+  display: grid;
+  grid-template-columns: 60px 1fr 28px;
+  align-items: center;
+  gap: 8px;
+}
+
+.player-card__stat-label {
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  color: $color-text-muted;
+  text-transform: uppercase;
+}
+
+.player-card__stat-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid $color-border;
+  overflow: hidden;
+}
+
+.player-card__stat-bar-fill {
+  height: 100%;
+  background: $color-primary;
+}
+
+.player-card__stat-bar-fill--accent {
+  background: $color-accent;
+}
+
+.player-card__stat-bar-fill--green {
+  background: #50f5a0;
+}
+
+.player-card__stat-value {
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  color: $color-primary;
+  text-align: right;
+}
+
+.player-card__footer {
+  border-top: 2px solid $color-primary;
+  padding: 6px $spacing-sm;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player-card__location {
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  color: $color-text-muted;
+}
+
+.player-card__status {
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  color: #50f5a0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.player-card__status::before {
+  content: "▮";
+  animation: blink 1s steps(1, end) infinite;
+}
+
+@keyframes pixelFadeIn {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -164,34 +311,22 @@
   }
 }
 
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes scrollLine {
+@keyframes scrollBlink {
   0%,
   100% {
-    transform: scaleY(1);
     opacity: 1;
   }
   50% {
-    transform: scaleY(0.5);
-    opacity: 0.4;
+    opacity: 0.2;
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
   }
 }

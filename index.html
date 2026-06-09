@@ -44,20 +44,86 @@
 
         <!-- Contenu -->
         <div class="hero__content container">
-          <p class="hero__eyebrow" aria-label="Bienvenue sur mon portfolio">
-            <span>✦</span> Bienvenue sur mon portfolio
-          </p>
-          <h1 class="hero__name">Alex Berrel</h1>
-          <p class="hero__title" role="doc-subtitle">Développeur Web</p>
-          <p class="hero__desc">
-            Je crée des sites modernes et des e-commerce performants.<br />
-            PHP · WordPress · WooCommerce · Strasbourg.
-          </p>
-          <div class="hero__cta">
-            <a href="#projects" class="btn btn--primary">
-              Voir mes projets ↓
-            </a>
-            <a href="#contact" class="btn btn--outline"> Me contacter ✉ </a>
+          <!-- Colonne gauche -->
+          <div class="hero__left">
+            <p class="hero__eyebrow"><span>▶</span> PLAYER SELECT</p>
+            <h1 class="hero__name">Alex Berrel</h1>
+            <p class="hero__title">Développeur Web</p>
+            <p class="hero__desc">
+              Je crée des sites modernes et des e-commerce performants.<br />
+              PHP · WordPress · WooCommerce · Strasbourg.
+            </p>
+            <div class="hero__cta">
+              <a href="#projects" class="btn btn--primary"
+                >Voir mes projets ↓</a
+              >
+              <a href="#contact" class="btn btn--outline">Me contacter ✉</a>
+            </div>
+          </div>
+
+          <!-- Colonne droite — fiche de perso -->
+          <div class="player-card">
+            <div class="player-card__header">
+              <span class="player-card__class">Web Developer</span>
+              <span class="player-card__level">LV. 01</span>
+            </div>
+
+            <div class="player-card__portrait">
+              <img
+                src="src/assets/character.jpg"
+                alt="Alex Berrel — pixel character"
+              />
+            </div>
+
+            <div class="player-card__name">ALEX BERREL</div>
+
+            <div class="player-card__stats">
+              <div class="player-card__stat">
+                <span class="player-card__stat-label">PHP</span>
+                <div class="player-card__stat-bar">
+                  <div
+                    class="player-card__stat-bar-fill"
+                    style="width: 80%"
+                  ></div>
+                </div>
+                <span class="player-card__stat-value">80</span>
+              </div>
+              <div class="player-card__stat">
+                <span class="player-card__stat-label">SCSS</span>
+                <div class="player-card__stat-bar">
+                  <div
+                    class="player-card__stat-bar-fill"
+                    style="width: 85%"
+                  ></div>
+                </div>
+                <span class="player-card__stat-value">85</span>
+              </div>
+              <div class="player-card__stat">
+                <span class="player-card__stat-label">JS</span>
+                <div class="player-card__stat-bar">
+                  <div
+                    class="player-card__stat-bar-fill--accent player-card__stat-bar-fill"
+                    style="width: 70%"
+                  ></div>
+                </div>
+                <span class="player-card__stat-value">70</span>
+              </div>
+              <div class="player-card__stat">
+                <span class="player-card__stat-label">WP</span>
+                <div class="player-card__stat-bar">
+                  <div
+                    class="player-card__stat-bar-fill--green player-card__stat-bar-fill"
+                    style="width: 75%"
+                  ></div>
+                </div>
+                <span class="player-card__stat-value">75</span>
+              </div>
+            </div>
+
+            <div class="player-card__footer">
+              <span class="player-card__location">📍 Strasbourg</span>
+              <span class="player-card__status">DISPO</span>
+            </div>
           </div>
         </div>
 
@@ -223,7 +289,7 @@
           <div class="projects__more">
             <a href="#" class="btn btn--game">Voir tout mes projets</a>
           </div>
-          </div>
+        </div>
       </section>
 
       <section id="about" class="about" aria-label="À propos de moi">
