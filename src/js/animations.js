@@ -55,3 +55,26 @@ export function initSmoothScroll() {
     });
   });
 }
+
+// --- Video preview au hover sur les cartes projets
+export function initCardVideos() {
+  document.querySelectorAll(".card__video video").forEach((video) => {
+    const card = video.closest(".card");
+    if (!card) return;
+
+    let playTimer;
+
+    card.addEventListener("mouseenter", () => {
+      playTimer = setTimeout(() => {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      }, 150);
+    });
+
+    card.addEventListener("mouseleave", () => {
+      clearTimeout(playTimer);
+      video.pause();
+      video.currentTime = 0;
+    });
+  });
+}

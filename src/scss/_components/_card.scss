@@ -56,3 +56,21 @@
   flex-wrap: wrap;
 }
 
+.card__video {
+  margin-bottom: $spacing-sm;
+  border-radius: $radius-md;
+  overflow: hidden;
+  filter: grayscale(1);
+  transition: filter $transition-base;
+
+  video {
+    width: 100%;
+    display: block;
+    border-radius: $radius-md;
+  }
+}
+
+.card:hover .card__video {
+  filter: grayscale(0);
+}
+
