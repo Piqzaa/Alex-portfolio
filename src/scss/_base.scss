@@ -1,5 +1,4 @@
 @use "variables" as *;
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500&display=swap");
 
 *,
 *::before,
@@ -125,8 +124,4 @@ h4 {
   margin: 0 auto;
 }
 
-@media (min-width: $bp-xl) {
-  body {
-    zoom: 1.15;
-  }
-}
+
