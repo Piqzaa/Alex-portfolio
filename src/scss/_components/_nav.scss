@@ -25,7 +25,6 @@
   font-family: $font-display;
   font-size: $fs-base;
   color: $color-primary;
-  image-rendering: pixelated;
 }
 
 .nav__logo:hover {
@@ -37,12 +36,6 @@
   align-items: center;
   gap: $spacing-xl;
   list-style: none;
-}
-
-@media (max-width: $bp-md) {
-  .nav__links {
-    display: none;
-  }
 }
 
 .nav__link {
@@ -76,4 +69,63 @@
 
 .nav__link.active {
   color: $color-primary;
+}
+
+// --- Mobile hamburger
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: calc($z-nav + 1);
+
+  span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: $color-primary;
+    transition: transform $transition-base, opacity $transition-base;
+  }
+}
+
+.nav--open .nav__hamburger span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav--open .nav__hamburger span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav--open .nav__hamburger span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: $bp-md) {
+  .nav__hamburger {
+    display: flex;
+  }
+
+  .nav__links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: $spacing-xl;
+    background: $color-bg;
+    z-index: $z-nav;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity $transition-base;
+  }
+
+  .nav--open .nav__links {
+    opacity: 1;
+    pointer-events: all;
+  }
 }

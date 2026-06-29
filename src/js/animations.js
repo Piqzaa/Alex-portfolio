@@ -56,6 +56,26 @@ export function initSmoothScroll() {
   });
 }
 
+// --- Hamburger menu mobile
+export function initMobileMenu(navSelector = ".nav") {
+  const nav = document.querySelector(navSelector);
+  const hamburger = nav?.querySelector(".nav__hamburger");
+  const links = nav?.querySelectorAll(".nav__link");
+  if (!nav || !hamburger) return;
+
+  hamburger.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("nav--open");
+    hamburger.setAttribute("aria-expanded", isOpen);
+  });
+
+  links?.forEach((link) => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("nav--open");
+      hamburger.setAttribute("aria-expanded", "false");
+    });
+  });
+}
+
 // --- Video preview au hover sur les cartes projets
 export function initCardVideos() {
   document.querySelectorAll(".card__video video").forEach((video) => {
@@ -63,18 +83,35 @@ export function initCardVideos() {
     if (!card) return;
 
     let playTimer;
+    let isPlaying = false;
 
-    card.addEventListener("mouseenter", () => {
-      playTimer = setTimeout(() => {
-        video.currentTime = 0;
-        video.play().catch(() => {});
-      }, 150);
-    });
+    function playVideo() {
+      if (isPlaying) return;
+      isPlaying = true;
+      video.currentTime = 0;
+      video.play().catch(() => { isPlaying = false; });
+    }
 
-    card.addEventListener("mouseleave", () => {
+    function pauseVideo() {
       clearTimeout(playTimer);
+      isPlaying = false;
       video.pause();
       video.currentTime = 0;
+    }
+
+    card.addEventListener("mouseenter", () => {
+      playTimer = setTimeout(playVideo, 150);
+    });
+
+    card.addEventListener("mouseleave", pauseVideo);
+
+    card.addEventListener("click", (e) => {
+      if (e.target.closest("a, .card__links")) return;
+      if (isPlaying) {
+        pauseVideo();
+      } else {
+        playVideo();
+      }
     });
   });
 }
