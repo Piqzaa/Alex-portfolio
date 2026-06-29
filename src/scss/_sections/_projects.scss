@@ -46,3 +46,16 @@
   color: $color-text-muted;
   margin-top: $spacing-sm;
 }
+
+.projects__disclaimer {
+  text-align: center;
+  font-size: $fs-xs;
+  color: $color-text-muted;
+  opacity: 0.55;
+  margin-top: $spacing-lg;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: $font-mono;
+  line-height: 1.6;
+}

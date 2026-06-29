@@ -74,3 +74,66 @@
   font-weight: 600;
   color: $color-text;
 }
+
+// --- Workflow
+.about__workflow {
+  margin-top: $spacing-3xl;
+  text-align: center;
+}
+
+.about__workflow-title {
+  font-size: $fs-xl;
+  margin-bottom: $spacing-xl;
+  background: $gradient-text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about__workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-md;
+  text-align: left;
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $bp-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.workflow-card {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  text-align: center;
+  transition:
+    border-color $transition-fast,
+    transform $transition-fast;
+
+  &:hover {
+    border-color: rgba($color-primary, 0.3);
+    transform: translateY(-4px);
+  }
+}
+
+.workflow-card__icon {
+  font-size: $fs-3xl;
+  margin-bottom: $spacing-sm;
+}
+
+.workflow-card__title {
+  font-size: $fs-base;
+  margin-bottom: $spacing-xs;
+  color: $color-text;
+}
+
+.workflow-card__desc {
+  font-size: $fs-sm;
+  color: $color-text-muted;
+  line-height: 1.6;
+}
