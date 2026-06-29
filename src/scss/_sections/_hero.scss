@@ -49,7 +49,8 @@
 .hero__content {
   position: relative;
   z-index: $z-content;
-  padding: 120px 0 $spacing-2xl;
+  padding-top: 120px;
+  padding-bottom: $spacing-2xl;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: $spacing-2xl;
@@ -60,6 +61,17 @@
   .hero__content {
     grid-template-columns: 1fr;
     text-align: center;
+    padding-top: 140px;
+    padding-bottom: $spacing-2xl;
+    gap: $spacing-xl;
+  }
+}
+
+@media (max-width: $bp-md) {
+  .hero__content {
+    padding-top: 100px;
+    padding-bottom: $spacing-xl;
+    gap: $spacing-lg;
   }
 }
 
@@ -179,7 +191,6 @@
 }
 
 .player-card__portrait {
-  position: relative;
   background: $color-bg;
   display: flex;
   align-items: flex-end;
@@ -195,20 +206,6 @@
   object-fit: contain;
   object-position: bottom;
   image-rendering: pixelated;
-}
-
-.player-card__portrait::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    $color-scanline 2px,
-    $color-scanline 4px
-  );
-  pointer-events: none;
 }
 
 .player-card__name {
@@ -230,7 +227,7 @@
 
 .player-card__stat {
   display: grid;
-  grid-template-columns: 60px 1fr 28px;
+  grid-template-columns: auto 1fr 28px;
   align-items: center;
   gap: 8px;
 }
@@ -239,7 +236,7 @@
   font-family: $font-mono;
   font-size: $fs-xs;
   color: $color-text-muted;
-  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .player-card__stat-bar {
@@ -254,14 +251,6 @@
   background: $color-primary;
 }
 
-.player-card__stat-bar-fill--accent {
-  background: $color-accent;
-}
-
-.player-card__stat-bar-fill--green {
-  background: #50f5a0;
-}
-
 .player-card__stat-value {
   font-family: $font-mono;
   font-size: $fs-xs;
@@ -272,6 +261,12 @@
 .player-card__footer {
   border-top: 2px solid $color-primary;
   padding: 6px $spacing-sm;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.player-card__footer-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -295,6 +290,13 @@
 .player-card__status::before {
   content: "▮";
   animation: blink 1s steps(1, end) infinite;
+}
+
+.player-card__role {
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  color: $color-primary;
+  text-align: center;
 }
 
 @keyframes pixelFadeIn {
@@ -327,3 +329,5 @@
     opacity: 0;
   }
 }
+
+
