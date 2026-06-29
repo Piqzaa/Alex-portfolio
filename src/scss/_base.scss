@@ -15,7 +15,7 @@ html {
 }
 
 body {
-  font-family: $font-body;
+  font-family: $font-mono;
   background-color: $color-bg;
   color: $color-text;
   line-height: 1.6;
@@ -36,7 +36,7 @@ body {
 }
 ::-webkit-scrollbar-thumb {
   background: rgba($color-primary, 0.4);
-  border-radius: $radius-full;
+  border-radius: $radius-sm;
   &:hover {
     background: rgba($color-primary, 0.7);
   }

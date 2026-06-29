@@ -35,9 +35,6 @@
   );
   transform: translate(-50%, -50%);
   pointer-events: none;
-  transition:
-    left 0.08s linear,
-    top 0.08s linear;
   will-change: left, top;
 }
 
@@ -110,7 +107,7 @@
 }
 
 .hero__desc {
-  font-family: $font-body;
+  font-family: $font-mono;
   font-size: $fs-base;
   color: $color-text-muted;
   max-width: 480px;

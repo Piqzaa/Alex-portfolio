@@ -4,7 +4,6 @@ $color-surface-alt: #131629; // hover states
 
 $color-primary: #7c6ef5; // violet clair (hero title)
 $color-accent: #e050a0; // rose/magenta (Développeur Web)
-$color-star: #ffffff; // particules
 
 $color-text: #e8e8f0; // texte principal
 $color-text-muted: #8888aa; // texte secondaire
@@ -26,7 +25,6 @@ $gradient-card: linear-gradient(
 );
 
 $font-display: "Press Start 2P", cursive;
-$font-body: "JetBrains Mono", monospace;
 $font-mono: "JetBrains Mono", monospace;
 $fs-xs: 0.75rem;
 $fs-sm: 0.875rem;
@@ -53,9 +51,7 @@ $bp-lg: 1024px;
 $bp-xl: 1280px;
 
 $radius-sm: 2px;
-$radius-md: 2px;
 $radius-lg: 4px;
-$radius-full: 2px;
 
 $z-particles: 0;
 $z-halo: 1;

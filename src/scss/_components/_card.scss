@@ -3,7 +3,7 @@
 .card {
   background: $color-surface;
   border: 1px solid $color-border;
-  border-radius: $radius-md;
+  border-radius: $radius-sm;
   padding: $spacing-md;
   transition:
     transform $transition-base,
@@ -58,7 +58,7 @@
 
 .card__video {
   margin-bottom: $spacing-sm;
-  border-radius: $radius-md;
+  border-radius: $radius-sm;
   overflow: hidden;
   filter: grayscale(1);
   transition: filter $transition-base;
@@ -69,7 +69,7 @@
     height: 100%;
     display: block;
     object-fit: cover;
-    border-radius: $radius-md;
+    border-radius: $radius-sm;
   }
 }
 
