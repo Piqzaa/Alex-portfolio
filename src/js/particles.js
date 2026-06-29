@@ -71,28 +71,6 @@ export function initParticles(canvasId) {
     animFrame = requestAnimationFrame(draw);
   }
 
-  // --- Connexions entre particules proches (optionnel, léger)
-  function drawConnections() {
-    const maxDist = 80;
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < maxDist) {
-          const alpha = (1 - dist / maxDist) * 0.08;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(124, 110, 245, ${alpha})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
-    }
-  }
-
   // --- Init
   resize();
   createParticles();
