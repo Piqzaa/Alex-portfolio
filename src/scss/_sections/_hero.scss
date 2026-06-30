@@ -63,7 +63,7 @@
     text-align: center;
     padding-top: 140px;
     padding-bottom: $spacing-2xl;
-    gap: $spacing-xl;
+    gap: $spacing-2xl;
   }
 }
 
@@ -71,7 +71,7 @@
   .hero__content {
     padding-top: 100px;
     padding-bottom: $spacing-xl;
-    gap: $spacing-lg;
+    gap: $spacing-2xl;
   }
 }
 
@@ -84,6 +84,10 @@
 @media (max-width: $bp-lg) {
   .hero__left {
     align-items: center;
+  }
+
+  .hero__cta {
+    justify-content: center;
   }
 }
 
@@ -157,6 +161,12 @@
   height: 40px;
   background: linear-gradient(to bottom, $color-primary, transparent);
   animation: scrollBlink 1.2s steps(2, end) infinite;
+}
+
+@media (max-width: $bp-lg) {
+  .hero__scroll {
+    display: none;
+  }
 }
 
 .player-card {
