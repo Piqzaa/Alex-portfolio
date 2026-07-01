@@ -8,7 +8,10 @@ export function initSpace(canvasId) {
   let warpIntensity = 0;
   let mouseX = 0;
   let mouseY = 0;
+  let time = 0;
   let animFrame;
+
+
 
   const STAR_COUNT = 220;
   const CONNECTION_DIST = 130;
@@ -51,14 +54,40 @@ export function initSpace(canvasId) {
     shootingStars.push({ x, y, angle, length, speed, life: 1 });
   }
 
+  function drawNebula(w, h, wi) {
+    if (wi < 0.05) return;
+    const alpha = wi * 0.35;
+    const layers = [
+      { cx: 0.3, cy: 0.4, r: 0.5, dx: 0.2, dy: 0.15, color: [124, 110, 245], phase: 0 },
+      { cx: 0.7, cy: 0.6, r: 0.4, dx: 0.15, dy: 0.2, color: [60, 40, 180], phase: 2.1 },
+      { cx: 0.5, cy: 0.3, r: 0.35, dx: 0.12, dy: 0.1, color: [224, 80, 160], phase: 4.2 },
+    ];
+    for (const n of layers) {
+      const x = w * n.cx + Math.sin(time * 0.0003 + n.phase) * w * n.dx;
+      const y = h * n.cy + Math.cos(time * 0.0004 + n.phase) * h * n.dy;
+      const radius = Math.min(w, h) * n.r;
+      const grad = ctx.createRadialGradient(x, y, 0, x, y, radius);
+      grad.addColorStop(0, `rgba(${n.color[0]}, ${n.color[1]}, ${n.color[2]}, ${alpha})`);
+      grad.addColorStop(0.5, `rgba(${n.color[0]}, ${n.color[1]}, ${n.color[2]}, ${alpha * 0.25})`);
+      grad.addColorStop(1, `rgba(${n.color[0]}, ${n.color[1]}, ${n.color[2]}, 0)`);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+    }
+  }
+
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const cx = canvas.width / 2;
-    const cy = canvas.height / 2;
+    const w = canvas.width;
+    const h = canvas.height;
+    const cx = w / 2;
+    const cy = h / 2;
     const wi = warpIntensity;
 
-    // --- Normal stars ---
+    // --- Nebula background ---
+    if (wi > 0.05) drawNebula(w, h, wi);
+
+    // --- Stars ---
     for (const s of stars) {
       s.pulsePhase += s.pulseSpeed;
       const pulsedOpacity = s.opacity * (0.6 + 0.4 * Math.sin(s.pulsePhase));
@@ -192,6 +221,7 @@ export function initSpace(canvasId) {
       ctx.restore();
     }
 
+    time++;
     animFrame = requestAnimationFrame(draw);
   }
 
