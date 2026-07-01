@@ -11,7 +11,8 @@ export function initSpace(canvasId) {
   let time = 0;
   let animFrame;
 
-
+  let speedLines = [];
+  let glowBursts = [];
 
   const STAR_COUNT = 220;
   const CONNECTION_DIST = 130;
@@ -75,6 +76,85 @@ export function initSpace(canvasId) {
     }
   }
 
+  function initSpeedLines(count) {
+    speedLines = [];
+    for (let i = 0; i < count; i++) {
+      speedLines.push({
+        angle: Math.random() * Math.PI * 2,
+        length: 40 + Math.random() * 140,
+        speed: 0.3 + Math.random() * 0.5,
+        progress: Math.random(),
+        width: 0.5 + Math.random() * 1.5,
+      });
+    }
+  }
+
+  function drawSpeedLines(w, h, cx, cy, wi) {
+    if (wi < 0.05) return;
+    for (const sl of speedLines) {
+      sl.progress += sl.speed * wi * 0.06;
+      if (sl.progress > 1) sl.progress -= 1;
+
+      const p = sl.progress;
+      const maxDist = Math.max(w, h) * 0.75;
+      const startDist = p * maxDist;
+      const endDist = startDist + sl.length * wi;
+      const alpha = Math.sin(p * Math.PI) * wi * 0.25;
+
+      const sx = cx + Math.cos(sl.angle) * startDist;
+      const sy = cy + Math.sin(sl.angle) * startDist;
+      const ex = cx + Math.cos(sl.angle) * endDist;
+      const ey = cy + Math.sin(sl.angle) * endDist;
+
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.lineTo(ex, ey);
+      ctx.strokeStyle = `rgba(124, 110, 245, ${alpha})`;
+      ctx.lineWidth = sl.width * wi;
+      ctx.stroke();
+    }
+  }
+
+  function drawGlowBursts(cx, cy, wi) {
+    if (wi < 0.1) return;
+    if (Math.random() < wi * 0.04) {
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 20 + Math.random() * 120;
+      glowBursts.push({
+        x: cx + Math.cos(angle) * dist,
+        y: cy + Math.sin(angle) * dist,
+        radius: 2 + Math.random() * 5,
+        life: 1,
+        speed: 0.02 + Math.random() * 0.03,
+      });
+    }
+    for (let i = glowBursts.length - 1; i >= 0; i--) {
+      const g = glowBursts[i];
+      g.life -= g.speed;
+      if (g.life <= 0) { glowBursts.splice(i, 1); continue; }
+      const alpha = g.life * wi * 0.4;
+      ctx.beginPath();
+      ctx.arc(g.x, g.y, g.radius * (1 + (1 - g.life) * 2), 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(180, 160, 255, ${alpha})`;
+      ctx.fill();
+    }
+  }
+
+  function spawnWarpShootingStar(cx, cy, wi) {
+    if (wi < 0.2 || Math.random() > wi * 0.05) return;
+    const angle = Math.random() * Math.PI * 2;
+    const length = 80 + Math.random() * 140;
+    const speed = 8 + Math.random() * 8;
+    shootingStars.push({
+      x: cx + (Math.random() - 0.5) * 50,
+      y: cy + (Math.random() - 0.5) * 50,
+      angle,
+      length,
+      speed,
+      life: 1,
+    });
+  }
+
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -86,6 +166,16 @@ export function initSpace(canvasId) {
 
     // --- Nebula background ---
     if (wi > 0.05) drawNebula(w, h, wi);
+
+    // --- Speed lines (warp trails) ---
+    if (speedLines.length === 0 && wi > 0.05) initSpeedLines(50);
+    if (wi > 0.05) drawSpeedLines(w, h, cx, cy, wi);
+
+    // --- Glow bursts ---
+    if (wi > 0.1) drawGlowBursts(cx, cy, wi);
+
+    // --- Warp shooting stars ---
+    if (wi > 0.2) spawnWarpShootingStar(cx, cy, wi);
 
     // --- Stars ---
     for (const s of stars) {
