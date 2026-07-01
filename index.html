@@ -64,6 +64,7 @@
   </head>
 
   <body>
+    <canvas id="space-canvas" aria-hidden="true"></canvas>
     <header>
       <nav class="nav" aria-label="Navigation principale">
         <a href="#hero" class="nav__logo" aria-label="Alex Berrel - Accueil"
@@ -86,12 +87,6 @@
 
     <main>
       <section id="hero" class="hero" aria-label="Introduction">
-        <canvas
-          id="hero-canvas"
-          class="hero__canvas"
-          aria-hidden="true"
-        ></canvas>
-
         <div class="hero__halo" aria-hidden="true">
           <div id="hero-halo-glow" class="hero__halo-glow"></div>
         </div>
@@ -194,6 +189,8 @@
           <span>scroll</span>
         </div>
       </section>
+
+      <div class="section-spacer" aria-hidden="true"></div>
 
       <section id="projects" class="projects" aria-label="Mes projets">
         <div class="container">

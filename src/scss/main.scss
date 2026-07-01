@@ -1,5 +1,6 @@
 // --- Base ---
 @use "base" as *;
+@use "variables" as *;
 
 // --- Components ---
 @use "_components/nav" as *;
@@ -13,3 +14,23 @@
 @use "_sections/skills" as *;
 @use "_sections/about" as *;
 @use "_sections/contact" as *;
+
+// --- Global space canvas ---
+#space-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  width: 100vw;
+  height: 100dvh;
+}
+
+// --- Transition spacer ---
+.section-spacer {
+  height: 100vh;
+  pointer-events: none;
+}
+
+
+
+

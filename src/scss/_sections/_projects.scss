@@ -2,6 +2,8 @@
 
 .projects {
   padding: $spacing-3xl 0;
+  min-height: 100vh;
+  will-change: transform, opacity;
 }
 
 .projects__header {
