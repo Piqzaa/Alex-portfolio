@@ -13,6 +13,7 @@ export function initSpace(canvasId) {
 
   let speedLines = [];
   let glowBursts = [];
+  let solarProgress = 0;
 
   const STAR_COUNT = 220;
   const CONNECTION_DIST = 130;
@@ -73,6 +74,98 @@ export function initSpace(canvasId) {
       grad.addColorStop(1, `rgba(${n.color[0]}, ${n.color[1]}, ${n.color[2]}, 0)`);
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, w, h);
+    }
+  }
+
+  function drawSolarSystem(w, h, cx, cy, sp) {
+    if (sp <= 0 || sp >= 1) return;
+    const s = Math.min(w, h) / 700;
+    const alpha = Math.sin(sp * Math.PI) * 0.35;
+    const tiltX = 0.4;
+
+    const planets = [
+      { r: 35, speed: 0.7, color: "#c0c0c0", radius: 2.0, ring: false },
+      { r: 50, speed: 0.55, color: "#e8c87a", radius: 2.8, ring: false },
+      { r: 70, speed: 0.4, color: "#4a90d9", radius: 3.5, ring: false },
+      { r: 95, speed: 0.3, color: "#c06040", radius: 3.0, ring: false },
+      { r: 130, speed: 0.22, color: "#d4a060", radius: 5.0, ring: true },
+      { r: 170, speed: 0.16, color: "#e0c880", radius: 4.5, ring: true },
+      { r: 210, speed: 0.12, color: "#70c0e0", radius: 4.0, ring: false },
+      { r: 250, speed: 0.08, color: "#6090c0", radius: 3.5, ring: false },
+      { r: 290, speed: 0.05, color: "#6080a0", radius: 3.0, ring: false },
+      { r: 320, speed: 0.03, color: "#506080", radius: 2.5, ring: false },
+      { r: 340, speed: 0.02, color: "#405060", radius: 2.0, ring: false },
+      { r: 355, speed: 0.015, color: "#304050", radius: 1.5, ring: false },
+    ];
+
+    for (const p of planets) {
+      const pr = p.r * s;
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, pr, pr * tiltX, 0, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(124, 110, 245, ${alpha * 0.08})`;
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+    }
+
+    const sg = ctx.createRadialGradient(cx, cy, 0, cx, cy, 55 * s);
+    sg.addColorStop(0, `rgba(255, 220, 120, ${alpha * 0.35})`);
+    sg.addColorStop(0.3, `rgba(255, 200, 80, ${alpha * 0.12})`);
+    sg.addColorStop(1, `rgba(200, 150, 50, 0)`);
+    ctx.fillStyle = sg;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 55 * s, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = `rgba(255, 230, 150, ${alpha})`;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 10 * s, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = `rgba(255, 250, 220, ${alpha * 0.5})`;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 5 * s, 0, Math.PI * 2);
+    ctx.fill();
+
+    const t = Date.now() * 0.0004;
+    for (const p of planets) {
+      const pr = p.r * s;
+      const angle = t * p.speed + (p.r * 0.1);
+      const px = cx + Math.cos(angle) * pr;
+      const py = cy + Math.sin(angle) * pr * tiltX;
+      const pRadius = p.radius * s;
+
+      const pg = ctx.createRadialGradient(px, py, 0, px, py, pRadius * 2);
+      pg.addColorStop(0, `${p.color}${Math.round(alpha * 50).toString(16).padStart(2, "0")}`);
+      pg.addColorStop(1, `${p.color}00`);
+      ctx.fillStyle = pg;
+      ctx.beginPath();
+      ctx.arc(px, py, pRadius * 2, 0, Math.PI * 2);
+      ctx.fill();
+
+      if (p.ring) {
+        ctx.save();
+        ctx.translate(px, py);
+        ctx.rotate(angle + 0.3);
+        ctx.strokeStyle = p.color;
+        ctx.globalAlpha = alpha * 0.15;
+        ctx.lineWidth = 0.8;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, pRadius * 2.5, pRadius * 0.6, 0, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      const pBody = ctx.createRadialGradient(
+        px - pRadius * 0.3, py - pRadius * 0.3, 0,
+        px, py, pRadius
+      );
+      pBody.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.15})`);
+      pBody.addColorStop(0.4, p.color);
+      pBody.addColorStop(1, `rgba(0, 0, 0, ${alpha * 0.25})`);
+      ctx.fillStyle = pBody;
+      ctx.beginPath();
+      ctx.arc(px, py, pRadius, 0, Math.PI * 2);
+      ctx.fill();
     }
   }
 
@@ -166,6 +259,11 @@ export function initSpace(canvasId) {
 
     // --- Nebula background ---
     if (wi > 0.05) drawNebula(w, h, wi);
+
+    // --- Solar system ---
+    if (solarProgress > 0 && solarProgress < 1) {
+      drawSolarSystem(w, h, cx, cy, solarProgress);
+    }
 
     // --- Speed lines (warp trails) ---
     if (speedLines.length === 0 && wi > 0.05) initSpeedLines(50);
@@ -319,6 +417,10 @@ export function initSpace(canvasId) {
     warpIntensity = Math.max(0, Math.min(1, v));
   }
 
+  function setSolarProgress(v) {
+    solarProgress = Math.max(0, Math.min(1, v));
+  }
+
   function setMouse(x, y) {
     mouseX = x;
     mouseY = y;
@@ -349,6 +451,7 @@ export function initSpace(canvasId) {
 
   return {
     setWarp,
+    setSolarProgress,
     cleanup: () => cancelAnimationFrame(animFrame),
   };
 }

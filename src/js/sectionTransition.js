@@ -1,3 +1,8 @@
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 export function initSectionTransition(spaceCtrl) {
   const hero = document.querySelector("#hero");
   const projects = document.querySelector("#projects");
@@ -19,6 +24,16 @@ export function initSectionTransition(spaceCtrl) {
     return Math.max(0, (cardMid - vh * 0.35) / (vh * 2.5));
   }
 
+  ScrollTrigger.create({
+    trigger: ".section-spacer",
+    start: "top bottom",
+    end: "bottom top",
+    scrub: 1.5,
+    onUpdate: (self) => {
+      spaceCtrl.setSolarProgress(self.progress);
+    },
+  });
+
   function update() {
     const scrollY = window.scrollY;
     const vh = window.innerHeight;
@@ -33,7 +48,6 @@ export function initSectionTransition(spaceCtrl) {
     velocity = velocity * VELOCITY_SMOOTH + diff * (1 - VELOCITY_SMOOTH);
     lastScrollY = scrollY;
 
-    // Dynamic entrance timing based on where projects actually is
     const enterEndRaw = (projects.offsetTop - vh * 0.2) / transitionDist;
     const enterEnd = Math.max(0.1, enterEndRaw - offset);
     const enterStart = Math.max(0, enterEnd - 0.14);
@@ -42,7 +56,6 @@ export function initSectionTransition(spaceCtrl) {
     if (isTransitioning) {
       const velocityFactor = Math.min(1, velocity / MAX_VELOCITY);
 
-      // Hero exit: progress 0 → 0.4
       if (progress < 0.4) {
         const p = progress / 0.4;
         const tz = p * -600;
@@ -60,7 +73,6 @@ export function initSectionTransition(spaceCtrl) {
         hero.style.pointerEvents = "none";
       }
 
-      // Projects entrance: dynamic timing based on actual position
       if (progress > enterStart && enterDuration > 0) {
         const p = Math.min(1, (progress - enterStart) / enterDuration);
         const tz = (1 - p) * -500;
@@ -75,7 +87,6 @@ export function initSectionTransition(spaceCtrl) {
         projects.style.willChange = "transform, opacity";
       }
 
-      // Warp: sync ramp down with entrance end
       let baseWarp;
       if (progress < 0.25) {
         baseWarp = progress / 0.25;
