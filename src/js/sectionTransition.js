@@ -1,123 +1,54 @@
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
-
 export function initSectionTransition(spaceCtrl) {
-  const hero = document.querySelector("#hero");
-  const projects = document.querySelector("#projects");
-  const card = document.querySelector(".player-card");
-  if (!hero || !projects || !spaceCtrl) return;
+  const hero = document.querySelector('.hero');
+  const projects = document.querySelector('.projects');
+  const html = document.documentElement;
+  if (!hero || !projects) return;
 
-  let animFrame;
-  let lastScrollY = window.scrollY;
-  let velocity = 0;
-  let lastProgress = -1;
-
-  const VELOCITY_SMOOTH = 0.88;
-  const MAX_VELOCITY = 60;
-
-  function getOffset(vh) {
-    if (window.innerWidth >= 1024) return 0;
-    if (!card) return 0;
-    const cardMid = card.offsetTop + card.offsetHeight / 2;
-    return Math.max(0, (cardMid - vh * 0.35) / (vh * 2.5));
-  }
-
-  ScrollTrigger.create({
-    trigger: ".section-spacer",
-    start: "top bottom",
-    end: "bottom top",
-    scrub: 1.5,
-    onUpdate: (self) => {
-      spaceCtrl.setSolarProgress(self.progress);
-    },
-  });
+  let ticking = false;
 
   function update() {
-    const scrollY = window.scrollY;
     const vh = window.innerHeight;
-    const transitionDist = vh * 2.5;
-    const offset = getOffset(vh);
+    const hr = hero.getBoundingClientRect();
+    const pr = projects.getBoundingClientRect();
 
-    const rawProgress = (scrollY - hero.offsetTop) / transitionDist;
-    const progress = Math.max(0, Math.min(1, rawProgress - offset));
-    const isTransitioning = progress > 0.001 && progress < 1;
+    // 0 = hero fully visible (bottom at viewport bottom)
+    // 1 = hero fully gone (bottom at viewport top)
+    const progress = Math.max(0, Math.min(1, 1 - hr.bottom / vh));
 
-    const diff = Math.abs(scrollY - lastScrollY);
-    velocity = velocity * VELOCITY_SMOOTH + diff * (1 - VELOCITY_SMOOTH);
-    lastScrollY = scrollY;
+    // Hero exit
+    const ho = 1 - progress;
+    const hty = -progress * 40;
+    html.style.setProperty('--hero-opacity', ho);
+    html.style.setProperty('--hero-translate-y', `${hty}px`);
 
-    const enterEndRaw = (projects.offsetTop - vh * 0.2) / transitionDist;
-    const enterEnd = Math.max(0.1, enterEndRaw - offset);
-    const enterStart = Math.max(0, enterEnd - 0.14);
-    const enterDuration = enterEnd - enterStart;
+    // Projects entrance (ease-in)
+    const po = progress < 0.01 ? 0 : progress * progress;
+    const pty = (1 - progress) * 30;
+    html.style.setProperty('--projects-opacity', po);
+    html.style.setProperty('--projects-translate-y', `${pty}px`);
 
-    if (isTransitioning) {
-      const velocityFactor = Math.min(1, velocity / MAX_VELOCITY);
+    // Warp pulse
+    const warp = Math.sin(progress * Math.PI) * 0.3;
+    spaceCtrl.setWarp(warp);
 
-      if (progress < 0.4) {
-        const p = progress / 0.4;
-        const tz = p * -600;
-        const rx = p * 18;
-        const sc = 1 - p * 0.35;
-        const op = Math.max(0, 1 - p * 1.4);
-        hero.style.transform = `perspective(1000px) translateZ(${tz}px) rotateX(${rx}deg) scale(${sc})`;
-        hero.style.opacity = op;
-        hero.style.willChange = "transform, opacity";
-        hero.style.pointerEvents = p > 0.3 ? "none" : "";
-      } else {
-        hero.style.transform = "perspective(1000px) translateZ(-600px) rotateX(18deg) scale(0.65)";
-        hero.style.opacity = "0";
-        hero.style.willChange = "transform, opacity";
-        hero.style.pointerEvents = "none";
-      }
-
-      if (progress > enterStart && enterDuration > 0) {
-        const p = Math.min(1, (progress - enterStart) / enterDuration);
-        const tz = (1 - p) * -500;
-        const sc = 0.85 + p * 0.15;
-        const op = Math.min(1, p * 2.5);
-        projects.style.transform = `perspective(1000px) translateZ(${tz}px) scale(${sc})`;
-        projects.style.opacity = op;
-        projects.style.willChange = "transform, opacity";
-      } else {
-        projects.style.transform = "perspective(1000px) translateZ(-500px) scale(0.85)";
-        projects.style.opacity = "0";
-        projects.style.willChange = "transform, opacity";
-      }
-
-      let baseWarp;
-      if (progress < 0.25) {
-        baseWarp = progress / 0.25;
-      } else if (progress < enterEnd - 0.12) {
-        baseWarp = 1;
-      } else if (progress < enterEnd) {
-        baseWarp = 1 - (progress - (enterEnd - 0.12)) / 0.12;
-      } else {
-        baseWarp = 0;
-      }
-      const warp = baseWarp * (0.1 + 0.9 * velocityFactor);
-      spaceCtrl.setWarp(warp);
-      document.documentElement.style.setProperty("--warp", warp);
-
-      lastProgress = progress;
-    } else if (lastProgress > 0.01) {
-      hero.style.transform = "";
-      hero.style.opacity = "";
-      hero.style.willChange = "";
-      hero.style.pointerEvents = "";
-      projects.style.transform = "";
-      projects.style.opacity = "";
-      projects.style.willChange = "";
-      document.documentElement.style.removeProperty("--warp");
-      spaceCtrl.setWarp(0);
-      lastProgress = -1;
-    }
-
-    animFrame = requestAnimationFrame(update);
+    ticking = false;
   }
 
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
   update();
-  return () => cancelAnimationFrame(animFrame);
+
+  return () => {
+    window.removeEventListener('scroll', onScroll);
+    html.style.removeProperty('--hero-opacity');
+    html.style.removeProperty('--hero-translate-y');
+    html.style.removeProperty('--projects-opacity');
+    html.style.removeProperty('--projects-translate-y');
+  };
 }
